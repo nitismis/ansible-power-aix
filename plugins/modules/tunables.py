@@ -669,6 +669,7 @@ def modify(module):
             results['bosboot_required'] = True
             results['reboot_required'] = True
 
+
 def validate_live_update(module, tunable_params_with_value):
     '''
     Checks that all tunables support -K option in AIX 7.3
@@ -685,12 +686,12 @@ def validate_live_update(module, tunable_params_with_value):
     contain_supported_tunables = False
     contain_non_supported_tunables = False
 
-    supported_tunables = ["ame_cpus_per_pool", "kernel_heap_size", "msem_nlocks",\
-                          "num_locks_per_semid","vmm_klock_mode", "timer_wheel_tick",\
-                          "extendednetstats", "lo_perf", "ipqmaxlen", "arptab_bsiz",\
-                          "arptab_nb", "tcp_inpcb_hashtab_siz", "udp_inpcb_hashtab_siz",\
-                          "use_sndbufpool", "udp_recv_perf",  "udp_send_perf", "rtentry_lock_complex"]
-    
+    supported_tunables = ["ame_cpus_per_pool", "kernel_heap_size", "msem_nlocks",
+                          "num_locks_per_semid", "vmm_klock_mode", "timer_wheel_tick",
+                          "extendednetstats", "lo_perf", "ipqmaxlen", "arptab_bsiz",
+                          "arptab_nb", "tcp_inpcb_hashtab_siz", "udp_inpcb_hashtab_siz",
+                          "use_sndbufpool", "udp_recv_perf", "udp_send_perf", "rtentry_lock_complex"]
+
     for params in tunable_params_with_value.keys():
         if params in supported_tunables:
             contain_supported_tunables = True
@@ -702,7 +703,7 @@ def validate_live_update(module, tunable_params_with_value):
             module.fail_json(**results)
 
     if contain_supported_tunables and not contain_non_supported_tunables:
-        return True          
+        return True
 
 
 def main():
