@@ -496,7 +496,14 @@ def reset(module):
 
     live_update = getOSlevel(module)
     if live_update and component in ['vmo', 'no']:
-        cmd += '-K '
+        valid_live_update_tunables = validate_live_update(module, tunable_params)
+        if valid_live_update_tunables:
+            if change_type != "reboot":
+                results['msg'] = "In AIX 7.3, if you want to change tunables which support"
+                results['msg'] += "live update flag, -K, then provide change_type as reboot."
+                module.fail_json(**results)
+            else:
+                cmd += '-K '
 
     # -p when used in combination with -o, -d or -D, makes changes apply to both current and
     # reboot values, that is, turns on the updating of the /etc/tunables/nextboot file in addition
@@ -635,7 +642,10 @@ def modify(module):
 
     live_update = getOSlevel(module)
     if live_update and component in ['vmo', 'no']:
-        valid_live_update_tunables = validate_live_update(module, tunable_params_with_value)
+        to_be_validated = []
+        for params in tunable_params_with_value.keys():
+            to_be_validated.append(params)
+        valid_live_update_tunables = validate_live_update(module, to_be_validated)
         if valid_live_update_tunables:
             if change_type != "reboot":
                 results['msg'] = "In AIX 7.3, if you want to change tunables which support"
@@ -670,7 +680,7 @@ def modify(module):
             results['reboot_required'] = True
 
 
-def validate_live_update(module, tunable_params_with_value):
+def validate_live_update(module, to_be_validated):
     '''
     Checks that all tunables support -K option in AIX 7.3
 
@@ -692,7 +702,7 @@ def validate_live_update(module, tunable_params_with_value):
                           "arptab_nb", "tcp_inpcb_hashtab_siz", "udp_inpcb_hashtab_siz",
                           "use_sndbufpool", "udp_recv_perf", "udp_send_perf", "rtentry_lock_complex"]
 
-    for params in tunable_params_with_value.keys():
+    for params in to_be_validated:
         if params in supported_tunables:
             contain_supported_tunables = True
         else:
