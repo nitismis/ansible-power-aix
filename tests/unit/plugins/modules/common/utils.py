@@ -64,3 +64,4 @@ emgr_output_path1 = os.path.dirname(os.path.abspath(__file__)) + "/sample_emgr_o
 emgr_output_path2 = os.path.dirname(os.path.abspath(__file__)) + "/sample_emgr_output2"
 emgr_output_path3 = os.path.dirname(os.path.abspath(__file__)) + "/sample_emgr_output3"
 emgr_output_path4 = os.path.dirname(os.path.abspath(__file__)) + "/sample_emgr_output4"
+sysdumpdev_output_path1 = os.path.dirname(os.path.abspath(__file__)) + "/sample_sysdumpdev_output1"

@@ -1,0 +1,9 @@
+primary              /dev/lg_dumplv
+secondary            /dev/sysdumpnull
+copy directory       /var/adm/ras
+forced copy flag     TRUE
+always allow dump    FALSE
+dump compression     ON
+type of dump         fw-assisted
+full memory dump     disallow
+enable NX GZIP       TRUE
