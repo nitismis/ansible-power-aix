@@ -77,9 +77,11 @@ options:
     - Agrees to all software license agreements which are required for software installation.
     type: bool
     default: no
-check_mode:
+  check_mode:
     description:
     - Performs a preview of an action by running all preinstallation checks for the specified action. No software changes are made.
+    type: bool
+    default: False
 notes:
   - You can refer to the IBM documentation for additional information on the installp command at
     U(https://www.ibm.com/support/knowledgecenter/ssw_aix_73/i_commands/install_all_updates.html)
@@ -291,6 +293,7 @@ def main():
             commit=dict(type='bool', default=False),
             dependencies=dict(type='bool', default=True),
             agree_licenses=dict(type='bool', default=False),
+            check_mode=dict(type='bool', default=False),
         ),
         required_if=[]
     )
