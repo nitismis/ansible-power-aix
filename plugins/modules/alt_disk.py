@@ -6,12 +6,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import os.path
-import re
-
-from ansible.module_utils.basic import AnsibleModule
-__metaclass__ = type
-
 ANSIBLE_METADATA = {'metadata_version': '1.1',
                     'status': ['preview'],
                     'supported_by': 'community'}
@@ -142,21 +136,21 @@ notes:
 
 EXAMPLES = r'''
 - name: Perform an alternate disk copy of the rootvg to hdisk1
-  alt_disk:
+  ibm.power_aix.alt_disk:
     action: copy
     targets: hdisk1
 
 - name: Perform an alternate disk copy of the rootvg to the smallest disk that can be selected
-  alt_disk:
+  ibm.power_aix.alt_disk:
     action: copy
     disk_size_policy: minimize
 
 - name: Perform a cleanup of any existing alternate disk copy
-  alt_disk:
+  ibm.power_aix.alt_disk:
     action: clean
 
 - name: Perform a cleanup of any existing alternate disk copy and old rootvg
-  alt_disk:
+  ibm.power_aix.alt_disk:
     action: clean
     allow_old_rootvg: true
 '''
@@ -177,6 +171,13 @@ stderr:
     returned: always
     type: str
 '''
+
+
+from ansible.module_utils.basic import AnsibleModule
+__metaclass__ = type
+
+import os.path
+import re
 
 results = None
 mirrors = -1

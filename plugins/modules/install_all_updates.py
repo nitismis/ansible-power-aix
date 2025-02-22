@@ -5,8 +5,6 @@
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
-from ansible.module_utils.basic import AnsibleModule
-__metaclass__ = type
 
 ANSIBLE_METADATA = {'metadata_version': '1.1',
                     'status': ['preview'],
@@ -32,6 +30,7 @@ options:
     description:
     - Specifies the device or directory that contains the installation images.
     type: str
+    required: true
   utilities_only:
     description:
     - Update install utilities only (bos.rte.install update).
@@ -79,7 +78,8 @@ options:
     type: bool
     default: no
 check_mode:
-  - Performs a preview of an action by running all preinstallation checks for the specified action. No software changes are made.
+    description:
+    - Performs a preview of an action by running all preinstallation checks for the specified action. No software changes are made.
 notes:
   - You can refer to the IBM documentation for additional information on the installp command at
     U(https://www.ibm.com/support/knowledgecenter/ssw_aix_73/i_commands/install_all_updates.html)
@@ -272,6 +272,9 @@ stderr:
       install_all_updates: Log file is /var/adm/ras/install_all_updates.log\n
       install_all_updates: Result = FAILURE'
 '''
+
+from ansible.module_utils.basic import AnsibleModule
+__metaclass__ = type
 
 
 def main():

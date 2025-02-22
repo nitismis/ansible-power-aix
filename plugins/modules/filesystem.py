@@ -5,7 +5,6 @@
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
-from ansible.module_utils.basic import AnsibleModule
 
 __metaclass__ = type
 
@@ -152,6 +151,10 @@ stderr:
     returned: If the command failed.
     type: str
 '''
+
+
+from ansible.module_utils.basic import AnsibleModule
+
 
 result = None
 crfs_specific_attributes = ["ag", "bf", "compress", "frag", "nbpi", "agblksize", "isnapshot"]

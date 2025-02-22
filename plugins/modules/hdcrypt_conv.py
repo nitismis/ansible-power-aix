@@ -5,8 +5,6 @@
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
-import re
-from ansible.module_utils.basic import AnsibleModule
 
 __metaclass__ = type
 
@@ -180,6 +178,11 @@ stderr:
     returned: always
     type: str
 '''
+
+
+import re
+from ansible.module_utils.basic import AnsibleModule
+
 
 result = None
 crypto_status = None
